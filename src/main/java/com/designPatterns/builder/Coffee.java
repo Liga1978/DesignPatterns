@@ -1,14 +1,24 @@
 package com.designPatterns.builder;
 
+import com.designPatterns.decorator.Decorator;
+import com.designPatterns.strategy.Context;
+
 public class Coffee {
+    private final Decorator decorator;
+    private final Context context;
     private final String type;
     private final String size;
-    private final boolean isSugar;
+    private final int sugar;
+    private final double price;
 
-    public Coffee(String type, String size, boolean isSugar) {
+
+    public Coffee(String type, String size, int sugar, double price, Decorator decorator, Context context) {
         this.type = type;
         this.size = size;
-        this.isSugar = isSugar;
+        this.sugar = sugar;
+        this.price = price;
+        this.decorator = decorator;
+        this.context = context;
     }
 
     public String getType() {
@@ -19,15 +29,19 @@ public class Coffee {
         return size;
     }
 
-    public boolean isSugar() {
-        return isSugar;
+    public Decorator getDecorator() {
+        return decorator;
     }
 
-    @Override
-    public String toString() {
-        return "Coffee" +
-                "type: " + type +
-                ", size: " + size +
-                ", isSugar: " + isSugar;
+    public Context getContext() {
+        return context;
+    }
+
+    public double getPrice() {
+        return (price + decorator.addPrice()) / 100;
+    }
+
+    public int getSugar() {
+        return sugar;
     }
 }
